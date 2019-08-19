@@ -215,33 +215,16 @@ class Db extends Base
             if (empty($this->queryString)) {
                 return [];
             }
-            $monitorSyslogRepository = \Cyberscan\Repository\MonitorSyslog::getInstance();
             global $config;
             try {
                 $this->statement->execute($this->params);
             } catch (\Exception $e) {
-                $monitorSyslogRepository->add([
-                    'host' => $config['db_name'],
-                    'instance' => 'SQL',
-                    'message' => $e->getMessage(),
-                    'severity' => 200,
-                    'details' => $this->queryString
-                ]);
-                return [];
+                var_dump($e);
             }
         } else {
             $this->statement->execute($this->params);
         }
         if ($this->statement->errorCode() > 0) {
-            if (!$debug) {
-                $monitorSyslogRepository->add([
-                    'host' => $config['db_name'],
-                    'instance' => 'SQL',
-                    'message' => $this->statement->errorInfo(),
-                    'severity' => 200,
-                    'details' => $this->queryString
-                ]);
-            }
             return [];
         }
         $results = $this->statement->fetchAll(\PDO::FETCH_ASSOC);

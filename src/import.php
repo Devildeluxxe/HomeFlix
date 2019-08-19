@@ -15,7 +15,7 @@ foreach ($files as $controller) {
 $files = scandir('src/repository/');
 foreach ($files as $repository) {
     if($repository != '.' AND $repository != '..'){
-        require_once 'src/controller/'. $repository;
+        require_once 'src/repository/'. $repository;
     }
 }
 
@@ -24,6 +24,6 @@ foreach ($files as $repository) {
 $files = scandir('src/services/');
 foreach ($files as $service) {
     if($service != '.' AND $service != '..'){
-        require_once 'src/controller/'. $service;
+        require_once 'src/services/'. $service;
     }
 }

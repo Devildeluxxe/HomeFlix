@@ -36,15 +36,7 @@ class Base
         }
         return $output;
     }
-    /**
-     * @param string $table
-     * @return object
-     */
-    protected function repository($table)
-    {
-        $repositoryName = '\\Cyberscan\\Repository\\' . ucfirst($this->fromUnderscoreToCamelCase($table));
-        return call_user_func( $repositoryName . '::getInstance');
-    }
+
     /**
      * @param array $fields
      * @param bool $limit
